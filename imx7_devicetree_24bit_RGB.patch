@@ -1,0 +1,35 @@
+--- a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi	2017-08-01 17:03:03.145841287 +0800
++++ b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi	2017-11-24 15:30:49.501476007 +0800
+@@ -144,12 +144,17 @@
+ 	display = <&display0>;
+ 	status = "okay";
+ 
+-	display0: lcd-display {
++	pinctrl-names = "default";
++        pinctrl-0 = <&pinctrl_lcdif_dat
++                 &pinctrl_lcdif_dat_24
++                 &pinctrl_lcdif_ctrl>;
++        
++        display0: lcd-display {
+ 		bits-per-pixel = <16>;
+-		bus-width = <18>;
++		bus-width = <24>;
+ 
+ 		display-timings {
+-			native-mode = <&timing_vga>;
++			native-mode = <&timing_wvga>;
+ 
+ 			/* Standard VGA timing */
+ 			timing_vga: 640x480 {
+@@ -321,7 +326,10 @@
+ };
+ 
+ &iomuxc {
+-	imx7d-eval-v3 {
++	pinctrl-names = "default";
++        pinctrl-0 = <&pinctrl_hog_1 &pinctrl_hog_2 &pinctrl_hog_4 &pinctrl_hog_5>; 
++        
++        imx7d-eval-v3 {
+ 		pinctrl_gpiotouch: touchgpios {
+ 			fsl,pins = <
+ 				MX7D_PAD_GPIO1_IO09__GPIO1_IO9		0x74
